@@ -12,7 +12,7 @@ database = "mydatabase"
 engine = create_engine(f"postgresql+psycopg2://{username}:{password}@{host}:{port}/{database}")
 
 # === 2. Membaca data hasil preprocessing ===
-csv_file = "review_play_with_sentiment.csv"  # hasil dari transform_clean.py
+csv_file = "data/review_play_with_sentiment.csv"  # hasil dari transform_clean.py
 df = pd.read_csv(csv_file)
 
 # === 3. Simpan ke tabel PostgreSQL ===

@@ -45,17 +45,21 @@ while True:
     if result and result[-1]['at'].year < 2020:
         break
 
-# Simpan ke CSV
-pd.DataFrame(reviews_2020_2022).to_csv("review_play_2020_2022.csv", index=False)
-print("Simpan review 2020-2022 ke review_play_2020_2022.csv")
-pd.DataFrame(reviews_2023_2025).to_csv("review_play_2023_2025.csv", index=False)
-print("Simpan review 2023-2025 ke review_play_2023_2025.csv")
+import os
+# Buat folder 'data' jika belum ada
+os.makedirs("data", exist_ok=True)
+
+# Simpan ke CSV di folder 'data'
+pd.DataFrame(reviews_2020_2022).to_csv("data/review_play_2020_2022.csv", index=False)
+print("Simpan review 2020-2022 ke data/review_play_2020_2022.csv")
+pd.DataFrame(reviews_2023_2025).to_csv("data/review_play_2023_2025.csv", index=False)
+print("Simpan review 2023-2025 ke data/review_play_2023_2025.csv")
 
 import glob
-# Get all CSV files in the folder
-csv_files = glob.glob("review_play_*.csv")
+# Get all CSV files in the 'data' folder
+csv_files = glob.glob("data/review_play_*.csv")
 # Read and concatenate all CSV files
 df_combined = pd.concat([pd.read_csv(f) for f in csv_files], ignore_index=True)
-# Save the combined DataFrame to a new CSV
-df_combined.to_csv("review_play_combined.csv", index=False)
-print("Simpan gabungan review ke review_play_combined.csv")
+# Save the combined DataFrame to a new CSV in 'data'
+df_combined.to_csv("data/review_play_combined.csv", index=False)
+print("Simpan gabungan review ke data/review_play_combined.csv")

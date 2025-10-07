@@ -7,7 +7,7 @@ from nltk.corpus import stopwords
 from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
 
 # === 1. Load Dataset ===
-df = pd.read_csv('review_play_combined.csv')
+df = pd.read_csv('data/review_play_combined.csv')
 print("Dataset loaded, jumlah baris:", len(df))
 print("Contoh data:\n", df[['content', 'at']].head())
 
@@ -114,5 +114,5 @@ print("Contoh hasil kategori sentiment:\n", df[['predicted_rating', 'sentiment_c
 
 # === 9. Simpan hasil akhir ===
 df['ulasan_bersih'] = df['stemmed_content'].apply(lambda x: ' '.join(x))
-df.to_csv('review_play_with_sentiment.csv', index=False)
-print("✅ Hasil akhir disimpan ke 'review_play_with_sentiment.csv'")
+df.to_csv('data/review_play_with_sentiment.csv', index=False)
+print("✅ Hasil akhir disimpan ke 'data/review_play_with_sentiment.csv'")

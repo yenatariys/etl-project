@@ -1,7 +1,7 @@
 import pandas as pd
 
 # Baca hasil preprocessing terakhir
-df = pd.read_csv('review_play_with_sentiment.csv')
+df = pd.read_csv('data/review_play_with_sentiment.csv')
 
 print("=== 📊 ANALISIS STATISTIK DATA ===\n")
 
