@@ -65,6 +65,7 @@ APP REVIEW ETL Project/
 │   │   ├── review_play_combined.csv       # File ulasan gabungan 
 │   │   └── review_play_with_sentiment.csv # Hasil akhir
 ├── README.md                              # Dokumentasi utama proyek
+├── requirements.txt                       # Dependency
 
 ```
 
