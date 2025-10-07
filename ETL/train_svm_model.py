@@ -83,7 +83,7 @@ print("Model SVM (TF-IDF) berhasil dilatih.")
 from sklearn.metrics import classification_report, confusion_matrix
 
 y_pred = model.predict(X_test_tfidf)
-print("\n📊 Laporan Klasifikasi TF-IDF:")
+print("\n Laporan Klasifikasi TF-IDF:")
 print(classification_report(y_test, y_pred))
 print("Confusion Matrix TF-IDF:")
 print(confusion_matrix(y_test, y_pred))
@@ -103,7 +103,7 @@ model_bert_svm = SVC(kernel='linear', random_state=42)
 model_bert_svm.fit(X_train_bert, y_train)
 y_pred_bert = model_bert_svm.predict(X_test_bert)
 
-print("\n📊 Laporan Klasifikasi IndoBERT:")
+print("\n Laporan Klasifikasi IndoBERT:")
 print(classification_report(y_test, y_pred_bert))
 print("Confusion Matrix IndoBERT:")
 print(confusion_matrix(y_test, y_pred_bert))
@@ -129,7 +129,7 @@ model_smote = SVC(kernel='linear', random_state=42)
 model_smote.fit(X_train_tfidf_smote, y_train_smote)
 y_pred_smote = model_smote.predict(X_test_tfidf)
 
-print("\n📊 Laporan Klasifikasi TF-IDF setelah SMOTE:")
+print("\n Laporan Klasifikasi TF-IDF setelah SMOTE:")
 print(classification_report(y_test, y_pred_smote))
 
 joblib.dump(model_smote, 'svm_model_tfidf_smote.pkl')
@@ -138,8 +138,8 @@ model_bert_smote = SVC(kernel='linear', random_state=42)
 model_bert_smote.fit(X_train_bert_smote, y_train_bert_smote)
 y_pred_bert_smote = model_bert_smote.predict(X_test_bert)
 
-print("\n📊 Laporan Klasifikasi IndoBERT setelah SMOTE:")
+print("\n Laporan Klasifikasi IndoBERT setelah SMOTE:")
 print(classification_report(y_test, y_pred_bert_smote))
 
 joblib.dump(model_bert_smote, 'svm_model_bert_smote.pkl')
-print("✅ Semua model berhasil disimpan.")
+print("Semua model berhasil disimpan.")

@@ -5,7 +5,7 @@ def run_script(script_name, log_file):
     """
     Menjalankan file .py lain secara berurutan.
     """
-    print(f"\n🚀 Menjalankan {script_name} ...")
+    print(f"\n Menjalankan {script_name} ...")
     result = subprocess.run(["python", script_name], capture_output=True, text=True)
 
     # Simpan log ke file
@@ -19,7 +19,7 @@ def run_script(script_name, log_file):
     if result.returncode == 0:
         print(f"✅ {script_name} selesai dijalankan dengan sukses.\n")
     else:
-        print(f"❌ Terjadi kesalahan saat menjalankan {script_name}.\n")
+        print(f"Terjadi kesalahan saat menjalankan {script_name}.\n")
         print(result.stderr)
         exit(1)  # hentikan pipeline jika ada error
 
@@ -41,11 +41,11 @@ def main():
             if os.path.exists(step):
                 run_script(step, log_file)
             else:
-                print(f"⚠️ File {step} tidak ditemukan, dilewati.\n")
-                log_file.write(f"⚠️ File {step} tidak ditemukan.\n")
+                print(f"File {step} tidak ditemukan, dilewati.\n")
+                log_file.write(f"File {step} tidak ditemukan.\n")
 
-    print("\n🎯 Semua tahap pipeline selesai dijalankan!\n")
-    print("📜 Log tersimpan di: pipeline_log.txt\n")
+    print("\n Semua tahap pipeline selesai dijalankan!\n")
+    print("Log tersimpan di: pipeline_log.txt\n")
 
 
 if __name__ == "__main__":

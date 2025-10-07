@@ -19,4 +19,4 @@ df = pd.read_csv(csv_file)
 table_name = "app_reviews"   # nama tabel tujuan
 df.to_sql(table_name, engine, if_exists="replace", index=False)
 
-print(f"✅ Data dari '{csv_file}' berhasil dimuat ke tabel '{table_name}' di database '{database}'.")
+print(f"Data dari '{csv_file}' berhasil dimuat ke tabel '{table_name}' di database '{database}'.")

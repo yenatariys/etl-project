@@ -28,4 +28,4 @@ df[['ulasan_bersih', 'sentiment_score', 'sentiment_category', 'predicted_rating'
     'review_play_stats.csv', index=False
 )
 
-print("\n✅ Statistik berhasil dihitung dan disimpan ke 'review_play_stats.csv'")
+print("\n Statistik berhasil dihitung dan disimpan ke 'review_play_stats.csv'")

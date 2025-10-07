@@ -65,9 +65,9 @@ print("Proses Stemming selesai")
 print("Contoh hasil stemming:\n", df[['stopword_removed_content', 'stemmed_content']].head())
 
 # === 7. Lexicon-based Sentiment ===
-path_lexicon = './lexicon/InSet-master'
-df_positif = pd.read_csv(f'{path_lexicon}/positive.tsv', names=['kata', 'nilai'], sep='\t')
-df_negatif = pd.read_csv(f'{path_lexicon}/negative.tsv', names=['kata', 'nilai'], sep='\t')
+path_lexicon = './InSet-master'
+df_positif = pd.read_csv(f'{path_lexicon}/positive.tsv', names=['kata', 'nilai'], sep='\t', skiprows=1)
+df_negatif = pd.read_csv(f'{path_lexicon}/negative.tsv', names=['kata', 'nilai'], sep='\t', skiprows=1)
 
 kamus_lexicon = dict(zip(df_positif['kata'], df_positif['nilai'].astype(int)))
 kamus_lexicon.update(dict(zip(df_negatif['kata'], df_negatif['nilai'].astype(int))))
@@ -115,4 +115,4 @@ print("Contoh hasil kategori sentiment:\n", df[['predicted_rating', 'sentiment_c
 # === 9. Simpan hasil akhir ===
 df['ulasan_bersih'] = df['stemmed_content'].apply(lambda x: ' '.join(x))
 df.to_csv('data/review_play_with_sentiment.csv', index=False)
-print("✅ Hasil akhir disimpan ke 'data/review_play_with_sentiment.csv'")
+print("Hasil akhir disimpan ke 'data/review_play_with_sentiment.csv'")
