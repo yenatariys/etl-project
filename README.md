@@ -113,3 +113,6 @@ APP REVIEW ETL Project/
 - Penggunaan InSet Lexicon dan SVM untuk klasifikasi sentimen.
 - Mengintegrasikan hasil analisis dengan PostgreSQL melalui SQLAlchemy.
 - Membangun pipeline terotomasi yang mudah dijalankan dengan satu perintah.
+
+## License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
