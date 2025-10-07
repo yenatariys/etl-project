@@ -39,27 +39,31 @@ Berikut alur utama dari pipeline:
 ## 🧱 Project Structure
 ```
 APP REVIEW ETL Project/
+├── Analysis/
+│   └── statistik.py                   # Analisis tambahan dan eksplorasi data
 │
-├── ETL/
-│ ├── extract_scraper.py
-│ ├── transform_clean.py
-│ ├── analyze_statistics.py
-│ ├── visualize_data.py
-│ ├── train_svm_model.py
-│ ├── load_to_sql.py
-│ └── pipeline.py
-│
-├── data/
-│ ├── review_play_combined.csv
-│ ├── review_play_cleaned.csv
-│ └── review_play_with_sentiment.csv
-│
-├── lexicon/
-│ ├── positive.tsv
-│ └── negative.tsv
-│
-├── requirements.txt
-└── README.md
+├── ETL/ 
+│   ├── InSet-master/                  # Lexicon (Indonesian Sentiment Lexicon)
+│   │   ├── positive.tsv
+│   │   ├── negative.tsv
+│   │   └── README.md
+│   │
+│   ├── extract_scraper.py                 # Scraping ulasan dari Play Store
+│   ├── transform_clean.py                 # Translasi, Cleaning, Tokenisasi, Stopword Removal, Stemming dan pelabelan sentimen
+│   ├── analyze_statistics.py              # Analisis statistik deskriptif ulasan
+│   ├── visualize_data.py                  # Visualisasi hasil analisis (grafik sentimen, distribusi, dll)
+│   ├── train_svm_model.py                 # Training model klasifikasi SVM
+│   ├── load_to_sql.py                     # Load hasil akhir ke database PostgreSQL
+│   ├── inconsistency.py                   # Analisis inkonsistensi antara rating dan sentimen
+│   └── pipeline.py                        # Pipeline utama untuk menjalankan seluruh proses ETL
+
+│   ├── data/                              # Tempat menyimpan file .csv
+│   │   ├── review_play_2020_2022.csv      # File ulasan 2020-2022
+│   │   ├── review_play_2023_2025.csv      # File ulasan 2023-2025
+│   │   ├── review_play_combined.csv       # File ulasan gabungan 
+│   │   └── review_play_with_sentiment.csv # Hasil akhir
+├── README.md                              # Dokumentasi utama proyek
+
 ```
 
 ---
