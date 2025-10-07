@@ -1,0 +1,15 @@
+google_play_scraper==1.2.7
+googletrans==3.1.0a0
+imblearn==0.0
+joblib==1.4.2
+matplotlib==3.10.6
+nltk==3.9.1
+numpy==2.3.3
+pandas==2.3.3
+Sastrawi==1.0.1
+Sastrawi==1.0.1
+scikit_learn==1.7.2
+SQLAlchemy==2.0.43
+torch==2.8.0
+transformers==4.57.0
+wordcloud==1.9.4
