@@ -37,7 +37,7 @@ Berikut alur utama dari pipeline:
 ---
 
 ## 🧱 Project Structure
-
+```
 APP REVIEW ETL Project/
 │
 ├── ETL/
@@ -60,7 +60,7 @@ APP REVIEW ETL Project/
 │
 ├── requirements.txt
 └── README.md
-
+```
 
 ---
 
