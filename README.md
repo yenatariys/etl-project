@@ -96,7 +96,7 @@ APP REVIEW ETL Project/
 4. **Run Pipeline Utama**
    ```bash
    python pipeline.py
-5. ** Cek Hasil **
+5. **Cek Hasil**
    - File hasil akhir (file: `review_play_with_sentiment.csv`)
    - Tabel hasil di PostgreSQL: `app_reviews`
 
