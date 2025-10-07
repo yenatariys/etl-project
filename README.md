@@ -1,7 +1,7 @@
 # 🧩 App Review ETL & Sentiment Analysis Pipeline
 
 ## 📖 Project Overview
-Proyek ini bertujuan untuk membangun **ETL pipeline (Extract, Transform, Load)** yang memproses **ulasan pengguna aplikasi dari Play Store dan App Store**, kemudian melakukan **analisis sentimen otomatis** menggunakan **lexicon-based method** dan **machine learning (SVM)**.
+Proyek ini bertujuan untuk membangun **ETL pipeline (Extract, Transform, Load)** yang memproses **ulasan pengguna aplikasi dari Play Store**, kemudian melakukan **analisis sentimen otomatis** menggunakan **lexicon-based method** dan **machine learning (SVM)** dengan dua metode **ekstraksi fitur (TF-IDF & IndoBERT Embeddings)**.
 
 Pipeline ini dirancang agar proses berjalan otomatis — mulai dari scraping data, cleaning, analisis sentimen, hingga menyimpan hasil akhir ke dalam **database PostgreSQL**.
 
@@ -12,12 +12,12 @@ Pipeline ini dirancang agar proses berjalan otomatis — mulai dari scraping dat
 Berikut alur utama dari pipeline:
 
 1. **Extract**  
-   - Mengambil data ulasan dari Play Store / App Store (file: `extract_scraper.py`)
+   - Mengambil data ulasan dari Play Store (file: `extract_scraper.py`)
    - Hasilnya disimpan dalam format `.csv`
 
 2. **Transform & Clean**  
    - Translasi bahasa ulasan (jika masih berbahasa asing)
-   - Text preprocessing: lowercasing, punctuation removal, tokenization, stopword removal, dan stemming (file: `transform_clean.py`)
+   - Text preprocessing: cleaning, tokenization, stopword removal, dan stemming (file: `transform_clean.py`)
    - Pelabelan sentimen otomatis menggunakan **InSet Lexicon** (positive & negative word dictionary)
 
 3. **Analyze & Visualize**  
@@ -26,6 +26,8 @@ Berikut alur utama dari pipeline:
 
 4. **Model Training (Machine Learning)**  
    - Training model **Support Vector Machine (SVM)** untuk klasifikasi sentimen berdasarkan dataset yang sudah dilabeli (file: `train_svm_model.py`)
+   - Menggunakan dua metode **ekstraksi fitur (TF-IDF & IndoBERT Embeddings)**
+   - Menampilkan hasil dengan dan tanpa **SMOTE**
 
 5. **Load to Database**  
    - Menyimpan hasil akhir ke **PostgreSQL database** menggunakan `SQLAlchemy` (file: `load_to_sql.py`)
