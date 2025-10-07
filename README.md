@@ -55,8 +55,8 @@ APP REVIEW ETL Project/
 │ └── review_play_with_sentiment.csv
 │
 ├── lexicon/
-│ ├── positive.txt
-│ └── negative.txt
+│ ├── positive.tsv
+│ └── negative.tsv
 │
 ├── requirements.txt
 └── README.md
