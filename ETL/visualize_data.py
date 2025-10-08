@@ -5,21 +5,8 @@ from sqlalchemy import create_engine
 from wordcloud import WordCloud
 import matplotlib.pyplot as plt
 
-# ==============================
-# 1️⃣ KONEKSI KE DATABASE
-# ==============================
-db_user = "myuser"
-db_password = "mypassword"
-db_host = "localhost"
-db_port = "5432"
-db_name = "mydatabase"
-
-engine = create_engine(f"postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}")
-
-# Ambil data dari tabel cleaned_reviews
-query = "SELECT * FROM cleaned_reviews;"
-df = pd.read_sql(query, engine)
-print(f"Jumlah data dari database: {len(df)}")
+# Baca file
+df = pd.read_csv('data/review_play_with_sentiment.csv')
 
 # ==============================
 # 2️⃣ DISTRIBUSI SENTIMEN

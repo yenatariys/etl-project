@@ -1,9 +1,15 @@
+import pandas as pd
+
+df = pd.read_csv('../ETL/data/review_play_with_sentiment.csv')
 # Hitung jumlah kata di setiap ulasan
 df['word_count'] = df['ulasan_bersih'].apply(lambda x: len(str(x).split()))
 
 stat_summary = df['word_count'].describe()
 print("Statistik Deskriptif Jumlah Kata per Ulasan:")
 print(stat_summary)
+
+print("Jumlah data yang kosong")
+print(df.isnull().sum())
 
 # Tampilkan histogram distribusi jumlah kata
 import matplotlib.pyplot as plt

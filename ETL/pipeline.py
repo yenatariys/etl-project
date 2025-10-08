@@ -28,12 +28,13 @@ def main():
     print("=== 🧩 PIPELINE SENTIMEN ANALISIS ULASAN ===\n")
 
     steps = [
-        "extract_scraper.py",      # 1️⃣ Scraping dari Play Store / App Store
-        "transform_clean.py",      # 2️⃣ Cleaning, tokenizing, lexicon labeling
-        "analyze_statistics.py",   # 3️⃣ Statistik deskriptif
-        "visualize_data.py",       # 4️⃣ Visualisasi hasil
-        "train_svm_model.py",      # 5️⃣ Training model SVM
-        "load_to_sql.py"           # Muat ke PostgreSQL
+        "extract_scraper.py",      # 1️ Scraping dari Play Store / App Store
+        "transform_clean.py",      # 2️ Cleaning, tokenizing, lexicon labeling
+        "analyze_statistics.py",   # 3️ Statistik deskriptif
+        "train_svm_model.py",      # 4 Training model SVM
+        "visualize_data,py"        # 5 Visualisasi hasil di dashboard
+        "load_to_sql.py",          # 6 Muat ke PostgreSQL
+
     ]
 
     with open("pipeline_log.txt", "a", encoding="utf-8") as log_file:

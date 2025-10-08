@@ -5,8 +5,8 @@ import time
 
 app_id = 'in.startv.hotstar.dplus'
 
-MAX_2020_2022 = 200
-MAX_2023_2025 = 200
+MAX_2020_2022 = 1000
+MAX_2023_2025 = 1000
 
 reviews_2020_2022 = []
 reviews_2023_2025 = []
@@ -49,10 +49,13 @@ import os
 # Buat folder 'data' jika belum ada
 os.makedirs("data", exist_ok=True)
 
-# Simpan ke CSV di folder 'data'
-pd.DataFrame(reviews_2020_2022).to_csv("data/review_play_2020_2022.csv", index=False)
+selected_columns = ['content', 'score', 'at']
+df_2020_2022 = pd.DataFrame(reviews_2020_2022)[selected_columns]
+df_2023_2025 = pd.DataFrame(reviews_2023_2025)[selected_columns]
+
+df_2020_2022.to_csv("data/review_play_2020_2022.csv", index=False)
 print("Simpan review 2020-2022 ke data/review_play_2020_2022.csv")
-pd.DataFrame(reviews_2023_2025).to_csv("data/review_play_2023_2025.csv", index=False)
+df_2023_2025.to_csv("data/review_play_2023_2025.csv", index=False)
 print("Simpan review 2023-2025 ke data/review_play_2023_2025.csv")
 
 import glob

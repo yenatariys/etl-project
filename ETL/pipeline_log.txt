@@ -1,0 +1,223 @@
+
+=== extract_scraper.py ===
+Batch 0 — Total 2020-2022: 0, Total 2023-2025: 200
+Batch 1 — Total 2020-2022: 0, Total 2023-2025: 400
+Batch 2 — Total 2020-2022: 0, Total 2023-2025: 600
+Batch 3 — Total 2020-2022: 0, Total 2023-2025: 800
+Batch 4 — Total 2020-2022: 0, Total 2023-2025: 1000
+Batch 5 — Total 2020-2022: 0, Total 2023-2025: 1000
+Batch 6 — Total 2020-2022: 0, Total 2023-2025: 1000
+Batch 7 — Total 2020-2022: 0, Total 2023-2025: 1000
+Batch 8 — Total 2020-2022: 0, Total 2023-2025: 1000
+Batch 9 — Total 2020-2022: 0, Total 2023-2025: 1000
+Batch 10 — Total 2020-2022: 0, Total 2023-2025: 1000
+Batch 11 — Total 2020-2022: 0, Total 2023-2025: 1000
+Batch 12 — Total 2020-2022: 0, Total 2023-2025: 1000
+Batch 13 — Total 2020-2022: 0, Total 2023-2025: 1000
+Batch 14 — Total 2020-2022: 0, Total 2023-2025: 1000
+Batch 15 — Total 2020-2022: 0, Total 2023-2025: 1000
+Batch 16 — Total 2020-2022: 0, Total 2023-2025: 1000
+Batch 17 — Total 2020-2022: 0, Total 2023-2025: 1000
+Batch 18 — Total 2020-2022: 0, Total 2023-2025: 1000
+Batch 19 — Total 2020-2022: 0, Total 2023-2025: 1000
+Batch 20 — Total 2020-2022: 0, Total 2023-2025: 1000
+Batch 21 — Total 2020-2022: 0, Total 2023-2025: 1000
+Batch 22 — Total 2020-2022: 0, Total 2023-2025: 1000
+Batch 23 — Total 2020-2022: 0, Total 2023-2025: 1000
+Batch 24 — Total 2020-2022: 0, Total 2023-2025: 1000
+Batch 25 — Total 2020-2022: 0, Total 2023-2025: 1000
+Batch 26 — Total 2020-2022: 0, Total 2023-2025: 1000
+Batch 27 — Total 2020-2022: 0, Total 2023-2025: 1000
+Batch 28 — Total 2020-2022: 0, Total 2023-2025: 1000
+Batch 29 — Total 2020-2022: 0, Total 2023-2025: 1000
+Batch 30 — Total 2020-2022: 0, Total 2023-2025: 1000
+Batch 31 — Total 2020-2022: 0, Total 2023-2025: 1000
+Batch 32 — Total 2020-2022: 0, Total 2023-2025: 1000
+Batch 33 — Total 2020-2022: 0, Total 2023-2025: 1000
+Batch 34 — Total 2020-2022: 0, Total 2023-2025: 1000
+Batch 35 — Total 2020-2022: 0, Total 2023-2025: 1000
+Batch 36 — Total 2020-2022: 0, Total 2023-2025: 1000
+Batch 37 — Total 2020-2022: 0, Total 2023-2025: 1000
+Batch 38 — Total 2020-2022: 0, Total 2023-2025: 1000
+Batch 39 — Total 2020-2022: 0, Total 2023-2025: 1000
+Batch 40 — Total 2020-2022: 0, Total 2023-2025: 1000
+Batch 41 — Total 2020-2022: 0, Total 2023-2025: 1000
+Batch 42 — Total 2020-2022: 0, Total 2023-2025: 1000
+Batch 43 — Total 2020-2022: 0, Total 2023-2025: 1000
+Batch 44 — Total 2020-2022: 0, Total 2023-2025: 1000
+Batch 45 — Total 2020-2022: 0, Total 2023-2025: 1000
+Batch 46 — Total 2020-2022: 0, Total 2023-2025: 1000
+Batch 47 — Total 2020-2022: 0, Total 2023-2025: 1000
+Batch 48 — Total 2020-2022: 0, Total 2023-2025: 1000
+Batch 49 — Total 2020-2022: 0, Total 2023-2025: 1000
+Batch 50 — Total 2020-2022: 0, Total 2023-2025: 1000
+Batch 51 — Total 2020-2022: 14, Total 2023-2025: 1000
+Batch 52 — Total 2020-2022: 214, Total 2023-2025: 1000
+Batch 53 — Total 2020-2022: 414, Total 2023-2025: 1000
+Batch 54 — Total 2020-2022: 614, Total 2023-2025: 1000
+Batch 55 — Total 2020-2022: 814, Total 2023-2025: 1000
+Batch 56 — Total 2020-2022: 1000, Total 2023-2025: 1000
+Simpan review 2020-2022 ke data/review_play_2020_2022.csv
+Simpan review 2023-2025 ke data/review_play_2023_2025.csv
+Simpan gabungan review ke data/review_play_combined.csv
+
+=== transform_clean.py ===
+Dataset loaded, jumlah baris: 2000
+Contoh data:
+                                              content                   at
+0  Rada kesel pengen nonton, udah coba buat bayar...  2022-12-31 22:23:16
+1                                              Hebat  2022-12-31 19:50:14
+2                               Ga bisa" mutar video  2022-12-31 18:58:09
+3                                     Apk tidak guna  2022-12-31 18:43:05
+4  Why keris siamang tunggal upin ipin movie cant...  2022-12-31 15:39:49
+Error translating text: _ssl.c:983: The handshake operation timed out
+Error translating text: _ssl.c:983: The handshake operation timed out
+Error translating text: _ssl.c:983: The handshake operation timed out
+Proses Translasi selesai
+Contoh hasil translasi:
+                                              content                                 translated_content
+0  Rada kesel pengen nonton, udah coba buat bayar...  Rada kesel pengen nonton, udah coba buat bayar...
+1                                              Hebat                                              Hebat
+2                               Ga bisa" mutar video                               Ga bisa" mutar video
+3                                     Apk tidak guna                                     Apk tidak guna
+4  Why keris siamang tunggal upin ipin movie cant...  Why keris siamang tunggal upin ipin movie cant...
+Proses Cleaning Selesai
+Contoh hasil cleaning:
+                                   translated_content                                    cleaned_content
+0  Rada kesel pengen nonton, udah coba buat bayar...  rada kesel pengen nonton udah coba buat bayar ...
+1                                              Hebat                                              hebat
+2                               Ga bisa" mutar video                                ga bisa mutar video
+3                                     Apk tidak guna                                     apk tidak guna
+4  Why keris siamang tunggal upin ipin movie cant...  why keris siamang tunggal upin ipin movie cant...
+Proses Tokenization selesai
+Contoh hasil tokenization:
+                                      cleaned_content                                  tokenized_content
+0  rada kesel pengen nonton udah coba buat bayar ...  [rada, kesel, pengen, nonton, udah, coba, buat...
+1                                              hebat                                            [hebat]
+2                                ga bisa mutar video                           [ga, bisa, mutar, video]
+3                                     apk tidak guna                                 [apk, tidak, guna]
+4  why keris siamang tunggal upin ipin movie cant...  [why, keris, siamang, tunggal, upin, ipin, mov...
+Proses Stopword Removal selesai
+Contoh hasil stopword removal:
+                                    tokenized_content                           stopword_removed_content
+0  [rada, kesel, pengen, nonton, udah, coba, buat...  [rada, kesel, pengen, nonton, udah, coba, baya...
+1                                            [hebat]                                            [hebat]
+2                           [ga, bisa, mutar, video]                                 [ga, mutar, video]
+3                                 [apk, tidak, guna]                                              [apk]
+4  [why, keris, siamang, tunggal, upin, ipin, mov...  [why, keris, siamang, tunggal, upin, ipin, mov...
+Proses Stemming selesai
+Contoh hasil stemming:
+                             stopword_removed_content                                    stemmed_content
+0  [rada, kesel, pengen, nonton, udah, coba, baya...  [rada, kesel, ken, nonton, udah, coba, bayar, ...
+1                                            [hebat]                                            [hebat]
+2                                 [ga, mutar, video]                                 [ga, mutar, video]
+3                                              [apk]                                              [apk]
+4  [why, keris, siamang, tunggal, upin, ipin, mov...  [why, keris, siamang, tunggal, upin, ipin, mov...
+Kamus lexicon dimuat, total kata: 9074
+Proses Lexicon-based Sentiment selesai
+Contoh hasil sentiment score:
+                                      stemmed_content  sentiment_score
+0  [rada, kesel, ken, nonton, udah, coba, bayar, ...              -12
+1                                            [hebat]                0
+2                                 [ga, mutar, video]                0
+3                                              [apk]                0
+4  [why, keris, siamang, tunggal, upin, ipin, mov...               -6
+Mapping sentiment score ke predicted rating dan kategori sentiment...
+Contoh hasil predicted rating:
+    sentiment_score  predicted_rating
+0              -12                 1
+1                0                 3
+2                0                 3
+3                0                 3
+4               -6                 1
+Mapping predicted rating ke kategori sentiment...
+Contoh hasil kategori sentiment:
+    predicted_rating sentiment_category
+0                 1            Negatif
+1                 3             Netral
+2                 3             Netral
+3                 3             Netral
+4                 1            Negatif
+Hasil akhir disimpan ke 'data/review_play_with_sentiment.csv'
+[nltk_data] Downloading package punkt to
+[nltk_data]     C:\Users\Lenovo\AppData\Roaming\nltk_data...
+[nltk_data]   Package punkt is already up-to-date!
+[nltk_data] Downloading package stopwords to
+[nltk_data]     C:\Users\Lenovo\AppData\Roaming\nltk_data...
+[nltk_data]   Package stopwords is already up-to-date!
+
+=== analyze_statistics.py ===
+=== ANALISIS STATISTIK DATA ===
+
+Jumlah total ulasan: 2000
+
+Statistik skor sentimen:
+count    2000.000000
+mean       -5.037500
+std         7.621492
+min       -73.000000
+25%        -8.000000
+50%        -4.000000
+75%         0.000000
+max        22.000000
+Name: sentiment_score, dtype: float64
+
+Distribusi kategori sentimen:
+sentiment_category
+Negatif    1398
+Positif     322
+Netral      280
+Name: count, dtype: int64
+
+Distribusi rating prediksi:
+predicted_rating
+1    849
+2    549
+3    280
+4    232
+5     90
+Name: count, dtype: int64
+
+Panjang ulasan (kata):
+count    2000.000000
+mean        9.089500
+std         8.536037
+min         1.000000
+25%         3.000000
+50%         7.000000
+75%        12.000000
+max        64.000000
+Name: panjang_ulasan, dtype: float64
+
+ Statistik berhasil dihitung dan disimpan ke 'data/review_play_stats.csv'
+
+=== train_svm_model.py ===
+Index(['content', 'score', 'at', 'translated_content', 'cleaned_content',
+       'tokenized_content', 'stopword_removed_content', 'stemmed_content',
+       'sentiment_score', 'predicted_rating', 'sentiment_category',
+       'ulasan_bersih'],
+      dtype='object')
+Jumlah data training: 1600
+Jumlah data testing: 400
+Traceback (most recent call last):
+  File "C:\Users\Lenovo\Downloads\APP REVIEW ETL Project\ETL\train_svm_model.py", line 30, in <module>
+    X_train_tfidf = vectorizer.fit_transform(X_train)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\feature_extraction\text.py", line 2105, in fit_transform
+    X = super().fit_transform(raw_documents)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\base.py", line 1365, in wrapper
+    return fit_method(estimator, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\feature_extraction\text.py", line 1377, in fit_transform
+    vocabulary, X = self._count_vocab(raw_documents, self.fixed_vocabulary_)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\feature_extraction\text.py", line 1264, in _count_vocab
+    for feature in analyze(doc):
+                   ^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\feature_extraction\text.py", line 99, in _analyze
+    doc = decoder(doc)
+          ^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\feature_extraction\text.py", line 232, in decode
+    raise ValueError(
+ValueError: np.nan is an invalid document, expected byte or unicode string.

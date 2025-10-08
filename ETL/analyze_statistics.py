@@ -3,7 +3,7 @@ import pandas as pd
 # Baca hasil preprocessing terakhir
 df = pd.read_csv('data/review_play_with_sentiment.csv')
 
-print("=== 📊 ANALISIS STATISTIK DATA ===\n")
+print("=== ANALISIS STATISTIK DATA ===\n")
 
 # 1️⃣ Statistik umum
 print("Jumlah total ulasan:", len(df))
@@ -25,7 +25,7 @@ print(df['panjang_ulasan'].describe())
 
 # Simpan hasil statistik ke file
 df[['ulasan_bersih', 'sentiment_score', 'sentiment_category', 'predicted_rating', 'panjang_ulasan']].to_csv(
-    'review_play_stats.csv', index=False
+    'data/review_play_stats.csv', index=False
 )
 
-print("\n Statistik berhasil dihitung dan disimpan ke 'review_play_stats.csv'")
+print("\n Statistik berhasil dihitung dan disimpan ke 'data/review_play_stats.csv'")

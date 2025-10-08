@@ -1,145 +1,219 @@
-# svm_model.py
 import pandas as pd
 import numpy as np
-from sqlalchemy import create_engine
+df = pd.read_csv('data/review_play_with_sentiment.csv')
 
-# ==============================
-# 1️⃣ KONEKSI KE DATABASE
-# ==============================
-db_user = "myuser"
-db_password = "mypassword"
-db_host = "localhost"
-db_port = "5432"
-db_name = "mydatabase"
+# == TF-IDF ==
 
-engine = create_engine(f"postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}")
-
-# Ambil data dari tabel yang sudah kamu load
-query = "SELECT * FROM app_reviews;"
-df = pd.read_sql(query, engine)
-print(f"Jumlah data dari database: {len(df)}")
-
-# Pastikan kolom sesuai
-print(df.columns)
-
-# ==============================
-# 2️⃣ PERSIAPAN DATA
-# ==============================
+# Data Preparation
 from sklearn.model_selection import train_test_split
+# Feature
+X = df['ulasan_bersih']
 
-X = df['ulasan_bersih']  # sesuaikan nama kolom
-y = df['sentiment_category']
-
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=42
+# Target
+y_tfidf = df['sentiment_category']
+X_train_tfidf, X_test_tfidf, y_train_tfidf, y_test_tfidf = train_test_split(
+    X, y_tfidf, test_size=0.2, random_state=42
 )
-print(f"Jumlah data training: {len(X_train)}")
-print(f"Jumlah data testing: {len(X_test)}")
 
-# ==============================
-# 3️⃣ FEATURE EXTRACTION: TF-IDF
-# ==============================
+print("TF-IDF Data Split:")
+print(f"X_train_tfidf: {X_train_tfidf.shape}, X_test_tfidf: {X_test_tfidf.shape}")
+print(f"y_train_tfidf: {y_train_tfidf.shape}, y_test_tfidf: {y_test_tfidf.shape}")
+
+# Feature Extraction
 from sklearn.feature_extraction.text import TfidfVectorizer
-vectorizer = TfidfVectorizer(max_features=5000)
-X_train_tfidf = vectorizer.fit_transform(X_train)
-X_test_tfidf = vectorizer.transform(X_test)
-print(f"Dimensi fitur TF-IDF: {X_train_tfidf.shape[1]}")
 
-# ==============================
-# 4️⃣ FEATURE EXTRACTION: IndoBERT
-# ==============================
-from transformers import BertTokenizer, BertModel
-import torch
+X_train_tfidf = X_train_tfidf.astype(str)
+X_test_tfidf = X_test_tfidf.astype(str)
 
-tokenizer = BertTokenizer.from_pretrained("indobenchmark/indobert-base-p1")
-model_bert = BertModel.from_pretrained("indobenchmark/indobert-base-p1")
+tfidf_vectorizer = TfidfVectorizer()
+X_train_tfidf = tfidf_vectorizer.fit_transform(X_train_tfidf)
+X_test_tfidf = tfidf_vectorizer.transform(X_test_tfidf)
 
-def get_bert_embeddings(texts):
-    embeddings = []
-    for text in texts:
-        inputs = tokenizer(text, return_tensors='pt', truncation=True, padding=True, max_length=512)
-        with torch.no_grad():
-            outputs = model_bert(**inputs)
-        cls_embedding = outputs.last_hidden_state[:, 0, :].squeeze().numpy()
-        embeddings.append(cls_embedding)
-    return np.array(embeddings)
+print("TF-IDF Shape:")
+print("X_train_tfidf shape: {X_train_tfidf.shape}")
+print("X_test_tfidf shape: {X_test_tfidf.shape}")
 
-print("Menghasilkan embedding IndoBERT (ini bisa agak lama)...")
-X_train_bert = get_bert_embeddings(X_train)
-X_test_bert = get_bert_embeddings(X_test)
-print(f"Dimensi fitur IndoBERT: {X_train_bert.shape[1]}")
-
-# ==============================
-# 5️⃣ TRAINING MODEL (TF-IDF)
-# ==============================
+# Model Training
 from sklearn.svm import SVC
-model = SVC(kernel='linear', random_state=42)
-model.fit(X_train_tfidf, y_train)
-print("Model SVM (TF-IDF) berhasil dilatih.")
+svm_tfidf = SVC(kernel='linear', random_state=42)
+svm_tfidf.fit(X_train_tfidf, y_train_tfidf)
+print("SVM (TF-IDF) Model Trained")
 
-# ==============================
-# 6️⃣ EVALUASI MODEL
-# ==============================
+# Prediction
+y_pred_tfidf = svm_tfidf.predict(X_test_tfidf)
+print("First 10 Predictions (TF-IDF):")
+print(y_pred_tfidf[:10])
+
+# Evaluation
 from sklearn.metrics import classification_report, confusion_matrix
 
-y_pred = model.predict(X_test_tfidf)
-print("\n Laporan Klasifikasi TF-IDF:")
-print(classification_report(y_test, y_pred))
-print("Confusion Matrix TF-IDF:")
-print(confusion_matrix(y_test, y_pred))
+print("Classification Report (TF-IDF):")
+print(classification_report(y_test_tfidf, y_pred_tfidf))
 
-# ==============================
-# 7️⃣ SIMPAN MODEL
-# ==============================
-import joblib
-joblib.dump(model, 'svm_model_tfidf.pkl')
-joblib.dump(vectorizer, 'tfidf_vectorizer.pkl')
-print("Model dan vectorizer berhasil disimpan.")
+import seaborn as sns
+import matplotlib.pyplot as plt
+fig = plt.figure()
+cm = confusion_matrix(y_test_tfidf, y_pred_tfidf, labels=svm_tfidf.classes_)
+sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', xticklabels=svm_tfidf.classes_, yticklabels=svm_tfidf.classes_)
+plt.title("Confusion Matrix - TF-IDF")
+plt.xlabel("Predicted")
+plt.ylabel("Actual")
+# Save Confusion Matrix
+fig.savefig("Confusion_Matrix_TFIDF.png", dpi=300)
+plt.show()
 
-# ==============================
-# 8️⃣ LATIH MODEL DENGAN IndoBERT
-# ==============================
-model_bert_svm = SVC(kernel='linear', random_state=42)
-model_bert_svm.fit(X_train_bert, y_train)
-y_pred_bert = model_bert_svm.predict(X_test_bert)
 
-print("\n Laporan Klasifikasi IndoBERT:")
-print(classification_report(y_test, y_pred_bert))
-print("Confusion Matrix IndoBERT:")
-print(confusion_matrix(y_test, y_pred_bert))
-
-joblib.dump(model_bert_svm, 'svm_model_bert.pkl')
-print("Model IndoBERT berhasil disimpan.")
-
-# ==============================
-# 9️⃣ SMOTE HANDLING
-# ==============================
+# SMOTE
 from imblearn.over_sampling import SMOTE
 smote = SMOTE(random_state=42)
+X_train_tfidf_smote, y_train_tfidf_smote = smote.fit_resample(X_train_tfidf, y_train_tfidf)
+print("Original Training Set Size (TF-IDF):", X_train_tfidf.shape)
+print("Resampled Training Set Size (TF-IDF):", X_train_tfidf_smote.shape)
 
-X_train_tfidf_smote, y_train_smote = smote.fit_resample(X_train_tfidf, y_train)
-X_train_bert_smote, y_train_bert_smote = smote.fit_resample(X_train_bert, y_train)
-print(f"Jumlah data training setelah SMOTE (TF-IDF): {len(y_train_smote)}")
-print(f"Jumlah data training setelah SMOTE (IndoBERT): {len(y_train_bert_smote)}")
+# Model Training with SMOTE
+svm_tfidf_smote = SVC(kernel='linear', random_state=42)
+svm_tfidf_smote.fit(X_train_tfidf_smote, y_train_tfidf_smote)
+print("SVM (TF-IDF + SMOTE) Model Trained")
+# Prediction with SMOTE
+y_pred_tfidf_smote = svm_tfidf_smote.predict(X_test_tfidf)
+print("First 10 Predictions (TF-IDF + SMOTE):")
+print(y_pred_tfidf_smote[:10])
+# Evaluation with SMOTE
+print("Classification Report (TF-IDF + SMOTE):")
+print(classification_report(y_test_tfidf, y_pred_tfidf_smote))
+fig = plt.figure()
+cm = confusion_matrix(y_test_tfidf, y_pred_tfidf_smote, labels=svm_tfidf_smote.classes_)
+sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', xticklabels=svm_tfidf_smote.classes_, yticklabels=svm_tfidf_smote.classes_)
+plt.title("Confusion Matrix - TF-IDF + SMOTE")
+plt.xlabel("Predicted")
+plt.ylabel("Actual")
+# Save Confusion Matrix
+fig.savefig("Confusion_matrix_tfidf_smote.png", dpi=300)
+plt.show()
 
-# ==============================
-# 🔁 LATIH ULANG DENGAN SMOTE
-# ==============================
-model_smote = SVC(kernel='linear', random_state=42)
-model_smote.fit(X_train_tfidf_smote, y_train_smote)
-y_pred_smote = model_smote.predict(X_test_tfidf)
 
-print("\n Laporan Klasifikasi TF-IDF setelah SMOTE:")
-print(classification_report(y_test, y_pred_smote))
 
-joblib.dump(model_smote, 'svm_model_tfidf_smote.pkl')
+# Comparison (TF-IDF)
+print("TF-IDF Without SMOTE")
+print(classification_report(y_test_tfidf, y_pred_tfidf))
+print("TF-IDF With SMOTE")
+print(classification_report(y_test_tfidf, y_pred_tfidf_smote))
+# End of TF-IDF
 
-model_bert_smote = SVC(kernel='linear', random_state=42)
-model_bert_smote.fit(X_train_bert_smote, y_train_bert_smote)
-y_pred_bert_smote = model_bert_smote.predict(X_test_bert)
+# == IndoBERT Embedding ==
+import torch
+from transformers import BertTokenizer, BertModel
+from sklearn.svm import SVC
+from tqdm import tqdm
 
-print("\n Laporan Klasifikasi IndoBERT setelah SMOTE:")
-print(classification_report(y_test, y_pred_bert_smote))
+model_name = "indobenchmark/indobert-base-p1"
+tokenizer = BertTokenizer.from_pretrained(model_name)
+bert_model = BertModel.from_pretrained(model_name)
 
-joblib.dump(model_bert_smote, 'svm_model_bert_smote.pkl')
-print("Semua model berhasil disimpan.")
+import torch
+
+# Pilih Device (GPU jika tersedia)
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+bert_model.to(device)
+print(f"Using device: {device}")
+
+# Fungsi untuk mendapatkan embedding dari teks
+def get_bert_embedding(text):
+    inputs = tokenizer(
+        text,
+        padding = True,
+        truncation = True,
+        return_tensors= "pt",
+        max_length=128,
+    ).to(device)
+
+    with torch.no_grad():
+        outputs = bert_model(**inputs)
+
+    # Ambil embedding dari [CLS] token
+    embedding = outputs.last_hidden_state[:,0,:].squeeze().cpu().numpy()
+    return embedding
+
+# Ambil fitur (X) dan target (y)
+X = df['ulasan_bersih'].astype(str).tolist()
+y_bert = df['sentiment_category']
+
+# Split data menjadi training dan testing
+X_train_bert, X_test_bert, y_train_bert, y_test_bert = train_test_split(
+    X, y_bert, test_size=0.2, random_state=42
+)
+
+# Fungsi Evaluasi
+def evaluate_model(model, X_test, y_test, labels, title=None):
+    y_pred = model.predict(X_test)
+    if title:
+        print(f"=== {title} ===")
+    print(classification_report(y_test, y_pred))
+
+    cm = confusion_matrix(y_test, y_pred, labels=labels)
+    sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', xticklabels=labels, yticklabels=labels)
+    plt.title(f"Confusion Matrix - {title}")
+    plt.xlabel("Predicted")
+    plt.ylabel("Actual")
+    plt.show()
+
+# Ubah teks jadi embedding IndoBERT
+X_train_bert_embed = np.array([get_bert_embedding(text) for text in tqdm(X_train_bert, desc="Embedding train")])
+X_test_bert_embed = np.array([get_bert_embedding(text) for text in tqdm(X_test_bert, desc="Embedding test")])
+
+# Model Training
+svm_bert = SVC(kernel='linear')
+svm_bert.fit(X_train_bert_embed, y_train_bert)
+print("SVM (IndoBERT) Model Trained")
+# Prediction
+y_pred_bert = svm_bert.predict(X_test_bert_embed)
+print("First 10 Predictions (IndoBERT):")
+print(y_pred_bert[:10])
+# Evaluation
+print("Classification Report (IndoBERT):")
+print(classification_report(y_test_bert, y_pred_bert))
+fig = plt.figure()
+cm = confusion_matrix(y_test_bert, y_pred_bert, labels=svm_bert.classes_)
+sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', xticklabels=svm_bert.classes_, yticklabels=svm_bert.classes_)
+plt.title("Confusion Matrix - IndoBERT")
+plt.xlabel("Predicted")
+plt.ylabel("Actual")
+# Save Confusion Matrix
+fig.savefig("Confusion_Matrix_BERT.png", dpi=300)
+plt.show()
+
+
+# SMOTE
+from imblearn.over_sampling import SMOTE
+smote = SMOTE(random_state=42)
+X_train_bert_smote, y_train_bert_smote = smote.fit_resample(X_train_bert_embed, y_train_bert)
+print("Original Training Set Size (IndoBERT):" , X_train_bert_embed.shape)
+print("Resampled Training Set Size (IndoBERT):" , X_train_bert_smote.shape)
+# Model Training with SMOTE
+svm_bert_smote = SVC(kernel='linear', random_state=42)
+svm_bert_smote.fit(X_train_bert_smote, y_train_bert_smote)
+print("SVM (IndoBERT + SMOTE) Model Trained")
+# Prediction with SMOTE
+y_pred_bert_smote = svm_bert_smote.predict(X_test_bert_embed)
+print("First 10 Predictions (IndoBERT + SMOTE):")
+print(y_pred_bert_smote[:10])
+# Evaluation with SMOTE
+print("Classification Report (IndoBERT + SMOTE):")
+print(classification_report(y_test_bert, y_pred_bert_smote))
+fig = plt.figure()
+cm = confusion_matrix(y_test_bert, y_pred_bert_smote, labels=svm_bert_smote.classes_)
+sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', xticklabels=svm_bert_smote.classes_, yticklabels=svm_bert_smote.classes_)
+plt.title("Confusion Matrix - IndoBERT + SMOTE")
+plt.xlabel("Predicted")
+plt.ylabel("Actual")
+# Save Confusion Matrix
+fig.savefig("Confusion_matrix_bert_smote.png", dpi=300)
+plt.show()
+
+
+# Comparison (IndoBERT)
+print("IndoBERT Without SMOTE")
+print(classification_report(y_test_bert, y_pred_bert))
+print("IndoBERT With SMOTE")
+print(classification_report(y_test_bert, y_pred_bert_smote))
+# End of IndoBERT
